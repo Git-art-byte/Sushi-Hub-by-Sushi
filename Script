@@ -15,8 +15,8 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
-    Humanoid = Window:AddTab({ Title = "Humanoid", Icon = "user" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+    Humanoid = Window:AddTab({ Title = "Humanoid", Icon = "user" })
 }
 
 -- Notification
@@ -30,7 +30,7 @@ Fluent:Notify({
 -- Variable to store walk speed value
 local walkSpeedValue = 16 -- Default walk speed
 
--- Input Field for WalkSpeed
+-- Input Field
 local Input = Tabs.Humanoid:AddInput("WalkSpeedInput", {
     Title = "WalkSpeed",
     Default = 16, -- Default value
@@ -74,60 +74,6 @@ Toggle:OnChanged(function()
         if player and player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.WalkSpeed = 16 -- Default walk speed
             print("WalkSpeed reset to default")
-        end
-    end
-end)
-
--- Add a separator for better organization
-Tabs.Humanoid:AddDivider()
-
--- Variable to store jump power value
-local jumpPowerValue = 50 -- Default jump power
-
--- Input Field for JumpPower
-local JumpInput = Tabs.Humanoid:AddInput("JumpPowerInput", {
-    Title = "Jump Power",
-    Default = 50, -- Default value
-    Placeholder = "Enter a value",
-    Numeric = true, -- Only allows numbers
-    Finished = false, -- Calls callback when Enter is pressed
-    Callback = function(Value)
-        jumpPowerValue = tonumber(Value) or 50 -- Convert input to number, default to 50 if invalid
-        print("Jump Power set to:", jumpPowerValue)
-    end
-})
-
--- Toggle to activate/deactivate jump power change
-local JumpToggle = Tabs.Humanoid:AddToggle("JumpPowerToggle", {
-    Title = "Activate Jump Power",
-    Default = false
-})
-
--- Variable to store the jump power loop
-local jumpPowerLoop = nil
-
-JumpToggle:OnChanged(function()
-    if JumpToggle.Value then
-        -- Create a loop that constantly applies the jump power
-        jumpPowerLoop = game:GetService("RunService").Heartbeat:Connect(function()
-            local player = game.Players.LocalPlayer
-            if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-                player.Character.Humanoid.JumpPower = jumpPowerValue
-            end
-        end)
-        print("Jump Power activated:", jumpPowerValue)
-    else
-        -- Disconnect the loop when toggle is off
-        if jumpPowerLoop then
-            jumpPowerLoop:Disconnect()
-            jumpPowerLoop = nil
-        end
-        
-        -- Reset to default jump power
-        local player = game.Players.LocalPlayer
-        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-            player.Character.Humanoid.JumpPower = 50 -- Default jump power
-            print("Jump Power reset to default")
         end
     end
 end)
