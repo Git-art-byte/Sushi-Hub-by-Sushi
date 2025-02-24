@@ -15,8 +15,8 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
-    Humanoid = Window:AddTab({ Title = "Humanoid", Icon = "user" }),
-	Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+    Humanoid = Window:AddTab({ Title = "Humanoid", Icon = "user" })
 }
 
 -- Notification
@@ -77,8 +77,8 @@ Toggle:OnChanged(function()
     end
 end)
 
--- Add a separator for better organization
-Tabs.Humanoid:AddDivider()
+-- Instead of AddDivider, use AddParagraph with empty content as a spacer
+Tabs.Humanoid:AddParagraph("", "")
 
 -- Variable to store jump power value
 local jumpPowerValue = 50 -- Default jump power
