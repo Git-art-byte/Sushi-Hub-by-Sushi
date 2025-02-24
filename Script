@@ -42,7 +42,6 @@ local Input = Tabs.Humanoid:AddInput("WalkSpeedInput", {
         print("WalkSpeed set to:", walkSpeedValue)
     end
 })
-
 -- Toggle to activate/deactivate walk speed change
 local Toggle = Tabs.Humanoid:AddToggle("WalkSpeedToggle", {
     Title = "Activate Walkspeed",
@@ -77,6 +76,7 @@ Toggle:OnChanged(function()
         end
     end
 end)
+
 
 --Settings
 SaveManager:SetLibrary(Fluent)
