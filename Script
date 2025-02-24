@@ -26,6 +26,45 @@ local Tabs = {
         Icon = "check"
     })
 end
+-- Variable to store walk speed value
+local walkSpeedValue = 16 -- Default walk speed
+
+-- Input Field
+local Input = Tabs.Main:AddInput("WalkSpeedInput", {
+    Title = "WalkSpeed",
+    Default = 16, -- Default value
+    Placeholder = "Enter a value",
+    Numeric = true, -- Only allows numbers
+    Finished = false, -- Calls callback when Enter is pressed
+    Callback = function(Value)
+        walkSpeedValue = tonumber(Value) or 16 -- Convert input to number, default to 16 if invalid
+        print("WalkSpeed set to:", walkSpeedValue)
+    end
+})
+
+-- Toggle to activate/deactivate walk speed change
+local Toggle = Tabs.Main:AddToggle("WalkSpeedToggle", {
+    Title = "Activate Walkspeed",
+    Default = false
+})
+
+Toggle:OnChanged(function()
+    if Toggle.Value then
+        -- Change the player's walk speed to the entered value
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = walkSpeedValue
+            print("WalkSpeed activated:", walkSpeedValue)
+        end
+    else
+        -- Reset to default speed when toggle is off
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = 16 -- Default walk speed
+            print("WalkSpeed reset to default")
+        end
+    end
+end
 --Settings
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
