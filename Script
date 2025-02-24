@@ -30,7 +30,7 @@ end
 local walkSpeedValue = 16 -- Default walk speed
 
 -- Input Field
-local Input = Tabs.Main:AddInput("WalkSpeedInput", {
+local Input = Tabs.Humanoid:AddInput("WalkSpeedInput", {
     Title = "WalkSpeed",
     Default = 16, -- Default value
     Placeholder = "Enter a value",
@@ -43,7 +43,7 @@ local Input = Tabs.Main:AddInput("WalkSpeedInput", {
 })
 
 -- Toggle to activate/deactivate walk speed change
-local Toggle = Tabs.Main:AddToggle("WalkSpeedToggle", {
+local Toggle = Tabs.Humanoid:AddToggle("WalkSpeedToggle", {
     Title = "Activate Walkspeed",
     Default = false
 })
